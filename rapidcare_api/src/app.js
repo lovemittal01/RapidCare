@@ -11,9 +11,9 @@ app.use(cors());
 
 dotenv.config();
 
-const accountSid = "ACfe6ff1654e3dc162992b45a80936edbd";
-const authToken = "e2afe236000d131566dced8a612e50f5";
-const verifySid = "VA6de3d1e30fbf3e3b97b50f3d101647fb";
+const accountSid = "";
+const authToken = "";
+const verifySid = "";
 const client = new twilio(accountSid, authToken);
 
 function generateOtp() {
