@@ -1,18 +1,12 @@
 import React from "react";
-import PhoneLoginComponent from "./components/login/index";
-import Dashboard from "./components/dashboard";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Verifyotp from "./components/login/verifyotp";
+import Main from "./Routes";
+import { BrowserRouter } from "react-router-dom";
+import Sidebar from "./components/dashboard/Sidebar";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<PhoneLoginComponent />} />
-        <Route path="/login" element={<PhoneLoginComponent />} />
-        <Route path="/verifyotp" element={<Verifyotp />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
+      <Sidebar />
     </BrowserRouter>
   );
 };

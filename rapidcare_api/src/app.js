@@ -1,7 +1,9 @@
+const crypto = require("crypto");
+
 // server.js
 const express = require("express");
 const bodyParser = require("body-parser");
-const twilio = require("twilio");
+// const twilio = require("twilio");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
@@ -11,10 +13,14 @@ app.use(cors());
 
 dotenv.config();
 
-const accountSid = "";
-const authToken = "";
-const verifySid = "";
-const client = new twilio(accountSid, authToken);
+function generateKey() {
+  return crypto.randomBytes(20).toString("hex");
+}
+
+// const accountSid = "ACfe6ff1654e3dc162992b45a80936edbd";
+// const authToken = "b0d391046221f74ce814ac9a8646d266";
+// const verifySid = "VA6de3d1e30fbf3e3b97b50f3d101647fb";
+const client = require("twilio")(accountSid, authToken);
 
 function generateOtp() {
   // Implement a function to generate a 6-digit OTP
@@ -58,8 +64,12 @@ app.post("/getotp", async (req, res) => {
       })
       .then((verification_check) => {
         console.log("sahi ho ra h", typeof verification_check.status);
-        if (verification_check.status === "approved")
-          res.status(200).json("Success");
+        if (verification_check.status === "approved") {
+          const token = generateKey();
+          res.status(200).json({
+            token: token,
+          });
+        }
       })
       .catch((error) => {
         console.log("Error", error);

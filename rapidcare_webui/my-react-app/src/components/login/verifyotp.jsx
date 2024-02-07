@@ -9,15 +9,31 @@ const Verifyotp = () => {
   const { phoneNumber } = state || {};
   const navigate = useNavigate();
 
+  console.log(phoneNumber);
+
   const [otpCode, setOtpCode] = useState("");
 
   const handleSubmitOtp = async () => {
-    const res = await axios.post("http://localhost:3001/getotp", {
-      otpCode,
-      phoneNumber,
-    });
-
-    console.log(check, res);
+    try {
+      const response = await fetch(`http://localhost:3001/getotp`, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          phoneNumber: phoneNumber,
+          otp: otpCode,
+        }),
+      });
+      console.log(response);
+      if (response.status !== 200) return;
+      const result = await response.json();
+      console.log(result);
+      // navigate("/dashboard");
+    } catch (err) {
+      console.error(`Error in verifying otp: ${err}`);
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import Sideelements from "../sideelements";
+import Doctors from "../doctors";
 
 const Slider = () => {
   return (
@@ -29,7 +30,7 @@ const Slider = () => {
             </span>
           </a>
           <ul className="space-y-4 font-medium">
-            <Sideelements />
+            <Doctors />
             <Sideelements />
             <Sideelements />
             <Sideelements />
